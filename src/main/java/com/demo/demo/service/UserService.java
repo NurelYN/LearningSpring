@@ -10,8 +10,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
+@Transactional
 public class UserService {
 
     private final UserRepository userRepository;
@@ -27,5 +32,17 @@ public class UserService {
         } catch(DataIntegrityViolationException ex){
             throw new DuplicateRecordException(String.format("Username: %s already exist",user.getUsername()));
         }
+    }
+
+    public Set<User> findAll(){
+        return new HashSet<>(userRepository.findAll());
+    }
+
+    public void delete(Long id){
+        userRepository.deleteById(id);
+    }
+
+    public void delete(String username){
+        userRepository.deleteByUsername(username);
     }
 }

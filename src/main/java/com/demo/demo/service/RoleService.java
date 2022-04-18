@@ -9,11 +9,13 @@ import lombok.NonNull;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class RoleService {
 
     private RoleRepository roleRepository;
@@ -36,6 +38,14 @@ public class RoleService {
         Role dbRole = findById(id);
         dbRole.setName(updatedRole.getName());
         return save(dbRole);
+    }
+
+    public void delete(Long id){
+        roleRepository.deleteById(id);
+    }
+
+    public void delete(String name){
+        roleRepository.deleteByName(name);
     }
 
 

@@ -1,14 +1,11 @@
 package com.demo.demo.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,4 +26,7 @@ public class User {
 
     @ManyToOne
     private Role role;
+
+    @ManyToOne
+    private City city;
 }
