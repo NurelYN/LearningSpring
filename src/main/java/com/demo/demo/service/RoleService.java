@@ -34,7 +34,9 @@ public class RoleService {
                 String.format("Role with id:%s is not found",id)));
     }
     
-    public Role update(Role updatedRole,@NonNull Long id){
+    public Role update(@NonNull Role updatedRole,@NonNull Long id){
+
+
         Role dbRole = findById(id);
         dbRole.setName(updatedRole.getName());
         return save(dbRole);
